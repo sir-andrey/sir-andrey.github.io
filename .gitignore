@@ -24,8 +24,9 @@ desktop.ini
 index-backup.html
 index-projects-update.html
 
-# PDF files
+# PDF files (except CV)
 *.pdf
+!assets/cv/Andrey-Maulana-CV.pdf
 
 # Text files
 *.txt
@@ -34,3 +35,4 @@ index-projects-update.html
 # - index.html
 # - assets/ folder
 # - README.md
+# - Andrey-Maulana-CV.pdf
