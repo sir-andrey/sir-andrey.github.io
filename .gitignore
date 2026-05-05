@@ -1,0 +1,36 @@
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary Files
+*.tmp
+*.log
+
+# Documentation - Don't deploy
+*.md
+!README.md
+
+# Backup files
+*-backup.*
+*.bak
+index-backup.html
+index-projects-update.html
+
+# PDF files
+*.pdf
+
+# Text files
+*.txt
+
+# Only deploy essential files:
+# - index.html
+# - assets/ folder
+# - README.md
