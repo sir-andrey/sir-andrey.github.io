@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andrey Maulana — CV</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --ink: #1a1d29;
+      --muted: #5b6270;
+      --line: #e2e5ea;
+      --accent: #0066ff;
+      --sidebar-bg: #f4f6f9;
+      --page: 210mm;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--ink);
+      background: #d9dde3;
+      line-height: 1.5;
+      font-size: 10.5pt;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Floating toolbar (screen only) */
+    .toolbar {
+      position: fixed; top: 16px; right: 16px; z-index: 100;
+      display: flex; gap: 10px;
+    }
+    .toolbar a, .toolbar button {
+      font: inherit; font-size: 10pt; font-weight: 600;
+      border: none; border-radius: 8px; cursor: pointer;
+      padding: 10px 16px; display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,.15);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .toolbar a:hover, .toolbar button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+    .btn-print { background: var(--accent); color: #fff; }
+    .btn-back { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+
+    /* A4 page */
+    .page {
+      width: var(--page); min-height: 297mm;
+      margin: 32px auto; background: #fff;
+      box-shadow: 0 10px 40px rgba(0,0,0,.18);
+      display: grid; grid-template-columns: 64mm 1fr;
+    }
+
+    /* Sidebar */
+    .sidebar { background: var(--sidebar-bg); padding: 0 8mm 14mm; }
+    .sidebar h2 {
+      font-size: 9pt; text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--accent); margin: 0 0 8px; padding-bottom: 5px;
+      border-bottom: 2px solid var(--line);
+    }
+    .sidebar section { margin-bottom: 9mm; }
+    /* Blue header band behind photo (full-bleed within sidebar) */
+    .sidebar-head {
+      margin: 0 -8mm 9mm; padding: 11mm 8mm;
+      background: linear-gradient(135deg, #0066ff 0%, #0047b3 100%);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .sidebar-head::after {
+      content: ""; position: absolute; inset: 0; opacity: .12;
+      background-image: radial-gradient(#fff 1px, transparent 1px);
+      background-size: 12px 12px; pointer-events: none;
+    }
+    .photo {
+      width: 38mm; height: 38mm; border-radius: 50%; object-fit: cover;
+      display: block; margin: 0 auto; border: 4px solid #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,.25); position: relative; z-index: 1;
+    }
+    .contact-item { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 7px; font-size: 9.5pt; color: var(--muted); }
+    .contact-item i { color: var(--accent); width: 14px; text-align: center; margin-top: 2px; }
+    .contact-item a { color: var(--muted); text-decoration: none; word-break: break-word; }
+
+    .skill-group { margin-bottom: 7px; }
+    .skill-group .lbl { font-weight: 600; font-size: 9pt; color: var(--ink); margin-bottom: 3px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+    .chip {
+      background: #fff; border: 1px solid var(--line); border-radius: 5px;
+      padding: 2px 7px; font-size: 8.5pt; color: var(--muted);
+    }
+    .chip.core { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+    .cert { font-size: 9.5pt; color: var(--muted); margin-bottom: 4px; }
+    .cert i { color: var(--accent); margin-right: 6px; }
+
+    /* Main column */
+    .main { padding: 14mm 12mm; }
+    .name { font-size: 26pt; font-weight: 700; line-height: 1.1; letter-spacing: -.5px; }
+    .role { font-size: 12pt; font-weight: 600; color: var(--accent); margin: 4px 0 10px; }
+    .summary { font-size: 10pt; color: var(--muted); margin-bottom: 9mm; }
+
+    .main h2 {
+      font-size: 11pt; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--ink); margin: 0 0 10px; padding-bottom: 5px;
+      border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: 8px;
+    }
+    .main h2 i { color: var(--accent); font-size: 10pt; }
+    .main section { margin-bottom: 9mm; }
+
+    .job { margin-bottom: 7mm; }
+    .job:last-child { margin-bottom: 0; }
+    .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+    .job-title { font-weight: 700; font-size: 11pt; }
+    .job-date { font-size: 8.5pt; color: var(--muted); white-space: nowrap; font-weight: 500; }
+    .job-co { font-size: 9.5pt; color: var(--accent); font-weight: 600; margin-bottom: 5px; }
+    .job ul { list-style: none; padding: 0; }
+    .job li { font-size: 9.5pt; color: var(--muted); padding-left: 14px; position: relative; margin-bottom: 3px; }
+    .job li::before { content: ""; position: absolute; left: 0; top: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .job .tech { font-size: 8.5pt; color: #8990a0; margin-top: 5px; font-style: italic; }
+
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 12px; }
+    .proj { font-size: 9.5pt; padding-left: 14px; position: relative; color: var(--muted); margin-bottom: 3px; }
+    .proj::before { content: "\f0c8"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 6pt; position: absolute; left: 0; top: 4px; color: var(--accent); }
+    .proj b { color: var(--ink); font-weight: 600; }
+    .proj span { display: block; font-size: 8pt; color: #8990a0; }
+
+    @media print {
+      @page { size: A4; margin: 0; }
+      body { background: #fff; }
+      .toolbar { display: none !important; }
+      .page { margin: 0; box-shadow: none; width: 100%; min-height: 100vh; }
+    }
+    @media (max-width: 800px) {
+      .page { grid-template-columns: 1fr; width: 100%; margin: 0; box-shadow: none; }
+      .toolbar { position: static; padding: 12px; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Site</a>
+    <button class="btn-print" onclick="window.print()"><i class="fas fa-file-pdf"></i> Save as PDF</button>
+  </div>
+
+  <div class="page">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <img src="assets/images/profile.jpg" alt="Andrey Maulana" class="photo">
+      </div>
+
+      <section>
+        <h2>Contact</h2>
+        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Bogor, West Java, Indonesia</span></div>
+        <div class="contact-item"><i class="fas fa-birthday-cake"></i><span>June 2, 2001</span></div>
+        <div class="contact-item"><i class="fas fa-phone"></i><a href="tel:+6289534103101">+62 895-3410-3101</a></div>
+        <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:sir.andreym@gmail.com">sir.andreym@gmail.com</a></div>
+        <div class="contact-item"><i class="fab fa-linkedin"></i><a href="https://linkedin.com/in/sir-andrey">linkedin.com/in/sir-andrey</a></div>
+        <div class="contact-item"><i class="fab fa-github"></i><a href="https://github.com/sir-andrey">github.com/sir-andrey</a></div>
+      </section>
+
+      <section>
+        <h2>Core Stack</h2>
+        <div class="chips">
+          <span class="chip core">PHP 8.x</span>
+          <span class="chip core">Laravel 8–12</span>
+          <span class="chip core">MySQL</span>
+          <span class="chip core">REST API</span>
+          <span class="chip core">Redis</span>
+          <span class="chip core">Docker</span>
+          <span class="chip core">Nginx</span>
+          <span class="chip core">Git</span>
+          <span class="chip core">Swagger</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Also Worked With</h2>
+        <div class="chips">
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Ruby on Rails</span>
+          <span class="chip">Firebase</span>
+          <span class="chip">AWS S3</span>
+          <span class="chip">Laravel Octane</span>
+          <span class="chip">Horizon</span>
+          <span class="chip">Pest</span>
+          <span class="chip">Larastan</span>
+          <span class="chip">Jenkins</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Expertise</h2>
+        <div class="chips">
+          <span class="chip">Clean Architecture</span>
+          <span class="chip">Repository Pattern</span>
+          <span class="chip">Database Design</span>
+          <span class="chip">Queue Systems</span>
+          <span class="chip">Performance Tuning</span>
+          <span class="chip">Audit Logging</span>
+          <span class="chip">Real-time Features</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Certifications</h2>
+        <div class="cert"><i class="fas fa-certificate"></i>SoloLearn — PHP</div>
+        <div class="cert"><i class="fas fa-certificate"></i>SoloLearn — Ruby</div>
+      </section>
+
+      <section>
+        <h2>Availability</h2>
+        <div class="cert"><i class="fas fa-laptop-code"></i>Freelance — Available</div>
+        <div class="cert"><i class="fas fa-briefcase"></i>Full-time — Not Available</div>
+      </section>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="name">Andrey Maulana</div>
+      <div class="role">Backend Engineer</div>
+      <p class="summary">Backend engineer with 7+ years of experience specializing in event management systems and high-scale web applications. Delivered 50+ production systems serving 100K+ total users, with a track record across Fortune 500 companies (BCA, Mandiri) and government institutions. Strong focus on modular architecture, database design, and system scalability.</p>
+
+      <section>
+        <h2><i class="fas fa-briefcase"></i> Experience</h2>
+
+        <div class="job">
+          <div class="job-head">
+            <span class="job-title">Back-end Engineer</span>
+            <span class="job-date">2022 – Present</span>
+          </div>
+          <div class="job-co">PT. Uniktif Media Indonesia</div>
+          <ul>
+            <li>Architected an in-house modular event management platform with reusable, plug-and-play components covering gamification, logistics, custom registration, and real-time features.</li>
+            <li>Delivered 50+ event management systems for clients including Fortune 500 companies (BCA, Mandiri) and government institutions, serving 100K+ total users.</li>
+            <li>Designed a generic database architecture using polymorphic relationships and normalized structure, reducing development time by 60% for new requirements.</li>
+            <li>Implemented clean architecture patterns — Repository, Service layer, Form Requests, Resources, Observers, and comprehensive audit logging.</li>
+            <li>Coordinated server scaling for high-traffic events handling 10,000+ concurrent users with &lt;200ms response time; maintained 99.9% uptime.</li>
+            <li>Led technical decisions for 6+ projects and mentored a junior developer on Laravel best practices and design patterns.</li>
+          </ul>
+          <div class="tech">Laravel 8–12 · PHP 8.0–8.3 · MySQL · PostgreSQL · Redis · Firebase · Horizon · Octane · Pulse · Docker · Nginx · AWS S3 · Pest · Larastan</div>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <span class="job-title">Back-end Developer</span>
+            <span class="job-date">2020 – 2022</span>
+          </div>
+          <div class="job-co">CV. Nine Operation Development</div>
+          <ul>
+            <li>Developed an e-commerce platform on Ruby on Rails with product management, shopping cart, and order processing.</li>
+            <li>Integrated payment gateways (Midtrans, Xendit) and shipping APIs for seamless transactions.</li>
+            <li>Optimized database performance through normalization and query tuning, improving page load times by 40%.</li>
+            <li>Implemented queue systems for email notifications and async processing using Sidekiq.</li>
+          </ul>
+          <div class="tech">Ruby on Rails · PostgreSQL · REST API · Sidekiq · Redis</div>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <span class="job-title">IT Staff</span>
+            <span class="job-date">2019 – 2020</span>
+          </div>
+          <div class="job-co">PT. Module Intracs Yasatama</div>
+          <ul>
+            <li>Built monitoring applications for SAP and Mobile Topup systems for health and performance tracking.</li>
+            <li>Developed REST APIs for Mobile Topup services using Laravel Lumen with full API documentation.</li>
+            <li>Maintained and troubleshot internal systems ensuring high availability.</li>
+          </ul>
+          <div class="tech">Laravel Lumen · REST API · MySQL</div>
+        </div>
+      </section>
+
+      <section>
+        <h2><i class="fas fa-folder-open"></i> Selected Projects</h2>
+        <div class="proj-grid">
+          <div class="proj"><b>BCA Wealth Summit</b> <span>2022–2025 · Jakarta · 1000+ concurrent users</span></div>
+          <div class="proj"><b>BCA Mega Quiz Banker Challenge</b> <span>2023–2025 · real-time game control</span></div>
+          <div class="proj"><b>Mandiri Investment Forum</b> <span>2024–2025 · 10,000+ concurrent · &lt;200ms</span></div>
+          <div class="proj"><b>Mandiri Leadership Forum</b> <span>2025 · Semarang · virtual cards</span></div>
+          <div class="proj"><b>International Agricultural Conference</b> <span>2024 · Bali · business matching</span></div>
+          <div class="proj"><b>International Transportation Forum</b> <span>2024 · Jakarta · 4000+ concurrent</span></div>
+          <div class="proj"><b>Oil &amp; Gas Industry Conference</b> <span>2023 · Bali · ticketing &amp; check-in</span></div>
+          <div class="proj"><b>International Political Summit</b> <span>2023 · Bali · state guest recording</span></div>
+        </div>
+        <p style="font-size:9pt;color:#8990a0;margin-top:7px;">+ 50 more projects across banking, government, corporate, and technology sectors (2022–2026).</p>
+      </section>
+    </main>
+
+  </div>
+
+</body>
+</html>
